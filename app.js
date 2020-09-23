@@ -16,25 +16,38 @@ class Game{
 
     createCards(){
         for(var i = 0; i < this.pair; i++){
-            var divCol = this.createDivCol(3);
-            var divCol2 = this.createDivCol(3);
 
             var cardElt = new Card(200,150,i, true,i).getCard();
             this.cards.push(cardElt);
 
             var cardElt2 = new Card(200,150,i, true,i).getCard();
             this.cards.push(cardElt2);
-            
-            document.querySelector("#mainContainer").appendChild(divCol);
-            document.querySelector("#mainContainer").appendChild(divCol2);
-
-            divCol.appendChild(cardElt);
-            divCol2.appendChild(cardElt2);
         }
     }
 
-    displayCardsRandom(){
+    randomizeCards(){
+        var i,
+            j,
+            tmp;
 
+        for (i = this.cards.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            tmp = this.cards[i];
+            this.cards[i] = this.cards[j];
+            this.cards[j] = tmp;
+        }
+        return this.cards;
+    }
+
+    displayCards(){
+        var randomCards = this.randomizeCards();
+        for(var i = 0; i < randomCards.length; i++){
+            var divCol = this.createDivCol(3);
+
+            document.querySelector("#mainContainer").appendChild(divCol);
+
+            divCol.appendChild(randomCards[i]);
+        }
     }
 
      show(){
@@ -80,3 +93,61 @@ class Card{
 
 var game = new Game();
 game.createCards();
+game.displayCards();
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*function randomize(tab) {
+    var i,
+        j,
+        tmp;
+
+    for (i = tab.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        tmp = tab[i];
+        tab[i] = tab[j];
+        tab[j] = tmp;
+    }
+    return tab;
+}
+var tab = [9, 4, 12, 3, 10,55,789,65,635,354,354];
+tab = randomize(tab);
+console.log(tab);*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
